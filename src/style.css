@@ -3,3 +3,85 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+body{
+    height: 100vh;
+}
+
+.content{
+    display: grid;
+    grid-template-rows: 100px 1fr 100px;
+    height: 100%;
+    background-color: #f0eef1;
+}
+
+header{
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px 0px;
+    display: flex;
+    justify-content: space-between;
+    padding: 36px;
+    align-items: center;
+}
+
+header .login{
+    font-size: 18px;
+}
+
+.maincontent{
+    display: grid;
+    grid-template-rows: 50px 1fr;
+    gap: 20px;
+    padding: 36px;
+    margin-top: 10px;
+}
+
+.maincontent .new_project{
+    width: 50px;
+    border-radius: 50%;
+    justify-self: center;
+    font-size: 32px;
+}
+
+.maincontent .container{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* grid-template-rows: repeat(2, 1fr); */
+    gap: 24px;
+}
+
+.maincontent .card{
+    width: 250px;
+    padding: 20px;
+    box-shadow: rgba(0, 0, 0, 0.16) 2px 2px 2px 2px;
+    display: grid;
+    
+}
+
+.maincontent .card .buttons{
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+}
+
+.maincontent .card button{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+footer{
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    
+}
+
+footer ul{
+    list-style: none;
+    display: flex;
+    gap: 10px;
+}
