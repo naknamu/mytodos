@@ -92,7 +92,6 @@ header .login:active {
 .maincontent .container{
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    /* grid-template-rows: repeat(2, 1fr); */
     gap: 16px;
 }
 
@@ -102,6 +101,11 @@ header .login:active {
     box-shadow: rgba(0, 0, 0, 0.16) 2px 2px 2px 2px;
     display: grid;
     gap: 8px;
+}
+
+.maincontent .card:hover{
+    transform: translateY(-4px);
+    box-shadow: rgba(0, 0, 0, 0.16) 5px 5px 5px 5px;
 }
 
 .maincontent .card .buttons{
@@ -114,10 +118,11 @@ header .login:active {
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    border: 2px solid black;
+    border: 2px solid #383838;
     font-size: 18px;
     font-weight: bold;
     background-color: white;
+    color: #383838;
 }
 
 .maincontent button:hover{
@@ -137,6 +142,7 @@ header .login:active {
 
 .maincontent .container .card .details{
     font-size: 14px;
+    color: rgba(51, 51, 51, 0.667);
 }
 
 footer{
