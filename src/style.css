@@ -1,3 +1,24 @@
+@font-face {
+    font-family: 'Poppins';
+    src: url('./Poppins-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Poppins';
+    src: url('./Poppins-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Poppins';
+    src: url('./Poppins-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+
 *{
     margin: 0;
     padding: 0;
@@ -13,6 +34,7 @@ body{
     grid-template-rows: 100px 1fr 100px;
     height: 100%;
     background-color: #f0eef1;
+    font-family: 'Poppins', sans-serif;
 }
 
 header{
@@ -26,6 +48,22 @@ header{
 
 header .login{
     font-size: 18px;
+    text-decoration: none;
+    color: black;
+    padding: 8px 16px;
+    border-radius: 6px;
+    border: 1px solid black;
+    background-color: white;
+}
+
+header .login:hover{
+    background-color: rgba(0, 0, 0, 0.16);
+}
+
+header .login:active {
+    background-color: rgba(0, 0, 0, 0.16);
+    box-shadow: 0 5px #555;
+    transform: translateY(4px);
 }
 
 .maincontent{
@@ -33,7 +71,7 @@ header .login{
     grid-template-rows: 50px 1fr;
     gap: 20px;
     padding: 36px;
-    margin-top: 10px;
+    margin-top: 5px;
 }
 
 .maincontent .new_project{
@@ -41,13 +79,21 @@ header .login{
     border-radius: 50%;
     justify-self: center;
     font-size: 32px;
+    border: 4px solid black;
+    background-color: white;
+}
+
+.maincontent .new_project:active {
+    background-color: rgba(0, 0, 0, 0.16);
+    box-shadow: 0 5px #555;
+    transform: translateY(4px);
 }
 
 .maincontent .container{
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     /* grid-template-rows: repeat(2, 1fr); */
-    gap: 24px;
+    gap: 16px;
 }
 
 .maincontent .card{
@@ -55,7 +101,7 @@ header .login{
     padding: 20px;
     box-shadow: rgba(0, 0, 0, 0.16) 2px 2px 2px 2px;
     display: grid;
-    
+    gap: 8px;
 }
 
 .maincontent .card .buttons{
@@ -68,6 +114,29 @@ header .login{
     width: 30px;
     height: 30px;
     border-radius: 50%;
+    border: 2px solid black;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: white;
+}
+
+.maincontent button:hover{
+    background-color: rgba(0, 0, 0, 0.16);
+}
+
+.maincontent .card button:active {
+    background-color: rgba(0, 0, 0, 0.16);
+    box-shadow: 0 3px #555;
+    transform: translateY(4px);
+}
+
+.maincontent .container .card .title{
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.maincontent .container .card .details{
+    font-size: 14px;
 }
 
 footer{
@@ -84,4 +153,13 @@ footer ul{
     list-style: none;
     display: flex;
     gap: 10px;
+}
+
+footer a{
+    text-decoration: none;
+    color: black;
+}
+
+footer a:hover{
+    text-decoration: underline;
 }
