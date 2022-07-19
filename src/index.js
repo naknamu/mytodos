@@ -1,5 +1,3 @@
-import './style.css'
+import './style.css';
+import './new-project.js';
 
-console.log("Hello World!");
-console.log("Are you watching?");
-console.log("Alright! Let's go!");
