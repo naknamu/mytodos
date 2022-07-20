@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Todos</title>
-    <script src="main.js" defer></script>
+    <script src="index.bundle.js" defer></script>
 </head>
 <body>
     <div class="content">
@@ -16,17 +16,17 @@
         <div class="maincontent">
             <button class="new_project">+</button>
             <div id="overlay">
-                <div class="form-popup" id="myForm">
-                    <form action="/action_page.php" class="form-container">
+                <div class="form-popup" onsubmit="return false" id="myForm">
+                    <form class="form-container">
                         <h1>New Project</h1>
     
                         <label for="name"><b>Name</b></label>
-                        <input type="text" placeholder="Enter Project Name" name="name" required>
+                        <input type="text" placeholder="Enter Project Name" name="name" id="name" required>
     
                         <label for="details"><b>Details</b></label>
                         <textarea type="text" placeholder="Enter Project Details" name="details" id="details" required></textarea>
     
-                        <button type="submit" class="btn">Submit</button>
+                        <button type="submit" class="btn submit">Submit</button>
                         <button type="button" class="btn cancel">Close</button>
                     </form>
                 </div>
