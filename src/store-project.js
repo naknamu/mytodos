@@ -1,28 +1,23 @@
-function storeNewProject() {
+import { printMe } from "./new-project";
+import { createCard } from "./create-card";
+import { closeForm } from "./new-project";
+
+function storeProjectIntoLocalStorage() {
     const project_name = document.querySelector('#name');
     const project_details = document.querySelector('#details');
 
-    // console.log(project_name.value);
-    // console.log(project_details.value);
+    //store in local storage
+    localStorage.setItem('proj_name', project_name.value);
+    localStorage.setItem('proj_details', project_details.value);
 
-    const store_projectName = localStorage.setItem('name', project_name.value);
-    const store_projectDetails = localStorage.setItem('details', project_details.value);
-
-    getNewProject();
+    //create card 
+    createCard();
 }
 
-function getNewProject() {
-    const get_projectName = localStorage.getItem('name');
-    const get_projectDetails = localStorage.getItem('details');
+//when form is submitted, store project into local storage in close the form popout
+const form = document.getElementById('myForm').onsubmit = function(){
+    storeProjectIntoLocalStorage();
+    closeForm();
 
-    console.log(get_projectName);
-    console.log(get_projectDetails);
+    return false;
 }
-
-
-const submit_button = document.querySelector('.submit');
-
-submit_button.addEventListener('click', () => {
-    storeNewProject();
-})
-

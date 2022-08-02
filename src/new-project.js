@@ -1,6 +1,5 @@
 //
 const newProject_button = document.querySelector('.new_project');
-const overlay = document.querySelector('.overlay');
 
 newProject_button.addEventListener('click', () => {
     // console.log("Add new project!");
@@ -17,3 +16,12 @@ closeForm_button.addEventListener('click', () => {
     document.getElementById("myForm").style.display = "none";
     document.getElementById("overlay").style.display = 'none';
 })
+
+export function closeForm() {
+    document.getElementById("myForm").style.display = "none";
+    document.getElementById("overlay").style.display = 'none';
+}
+
+export function printMe(){
+    console.log('Im from new project!');
+}
