@@ -32,6 +32,13 @@ export function createCard() {
     new_btn_count.textContent = '0';
     new_btn_delete.textContent = 'X';
 
+    //add todos listener
+    new_btn_add.addEventListener('click', () => {
+        // console.log('enable add todo form!');
+        document.getElementById("myTodos").style.display = "block";
+        document.getElementById("todo-overlay").style.display = "block";
+    })
+
     //add class
     new_btn_delete.classList.add('delete_btn');
 

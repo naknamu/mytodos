@@ -15,7 +15,7 @@
         </header>
         <div class="maincontent">
             <button class="new_project">+</button>
-            <div id="overlay">
+            <div class="overlay-disabler" id="overlay">
                 <div class="form-popup" id="myForm">
                     <form class="form-container">
                         <h1>New Project</h1>
@@ -23,14 +23,15 @@
                         <label for="name"><b>Name</b></label>
                         <input type="text" placeholder="Enter Project Name" name="name" id="name" required>
     
-                        <label for="details"><b>Details</b></label>
-                        <textarea type="text" placeholder="Enter Project Details" name="details" id="details" required></textarea>
+                        <label for="description"><b>Description</b></label>
+                        <textarea type="text" placeholder="Enter Project Description" name="description" id="description" required></textarea>
     
                         <button type="submit" class="btn submit">Submit</button>
                         <button type="button" class="btn cancel">Close</button>
                     </form>
                 </div>
             </div>
+
             <div class="container">
                 <!-- <div class="card">
                     <div class="title">Lorem ipsum dolor</div>
@@ -43,17 +44,45 @@
                         <button>X</button>
                     </div>
                 </div> -->
-                <!-- <div class="card">
-                    <div>Lorem ipsum dolor</div>
-                    <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
-                    <div class="buttons">
-                        <button>+</button>
-                        <button>view</button>
-                        <button>3</button>
-                        <button>X</button>
-                    </div>
-                </div> -->
+            </div>
+
+            <div class="overlay-disabler" id="todo-overlay">
+                <div class="form-popup" id="myTodos">
+                    <form class="form-container">
+                        <h1>New Project</h1>
+    
+                        <label for="todo_title"><b>Title</b></label>
+                        <input type="text" placeholder="Enter Todo Title" name="todo_title" id="todo_title" required>
+    
+                        <label for="details"><b>Details</b></label>
+                        <textarea type="text" placeholder="Enter Project Details" name="details" id="details" required></textarea>
+                        
+                        <label for="due-date"><b>Due Date</b></label>
+                        <input type="datetime" name="due-date" id="due-date" required>
+
+                        <label for="priority_type">Priority</label>
+                        <div>
+                        <input type="radio" id="low_prio" name="priority_type" value="low" required>
+                        <label for="low_prio">Low</label>
+                        </div>
+
+                        <div>
+                        <input type="radio" id="medium_prio" name="priority_type" value="medium" required>
+                        <label for="medium_prio">Medium</label>
+                        </div>
+
+                        <div>
+                        <input type="radio" id="medium_prio" name="priority_type" value="high" required>
+                        <label for="high_prio">High</label>
+                        </div>
+
+                        <label for="notes"><b>Notes</b></label>
+                        <textarea type="text" placeholder="Enter some notes" name="notes" id="notes"></textarea>
+
+                        <button type="submit" class="btn submit">Submit</button>
+                        <button type="button" class="btn cancel">Close</button>
+                    </form>
+                </div>
             </div>
         </div>
         <footer>

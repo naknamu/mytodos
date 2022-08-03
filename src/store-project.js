@@ -4,7 +4,7 @@ import { closeForm } from "./new-project";
 
 function storeProjectIntoLocalStorage() {
     const project_name = document.querySelector('#name');
-    const project_details = document.querySelector('#details');
+    const project_details = document.querySelector('#description');
 
     //store in local storage
     localStorage.setItem('proj_name', project_name.value);

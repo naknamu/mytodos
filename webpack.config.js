@@ -6,8 +6,7 @@ module.exports = {
     index: './src/index.js',
     newProject: './src/new-project.js',
     storeProject: './src/store-project.js',
-    createCard: './src/create-card.js',
-    cardButtons: './src/card-buttons.js'
+    createCard: './src/create-card.js'
   },
   output: {
     filename: '[name].bundle.js',
