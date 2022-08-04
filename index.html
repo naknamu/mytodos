@@ -49,18 +49,21 @@
             <div class="overlay-disabler" id="todo-overlay">
                 <div class="form-popup" id="myTodos">
                     <form class="form-container">
-                        <h1>New Project</h1>
+                        <h1>Add Todos</h1>
     
                         <label for="todo_title"><b>Title</b></label>
                         <input type="text" placeholder="Enter Todo Title" name="todo_title" id="todo_title" required>
     
                         <label for="details"><b>Details</b></label>
-                        <textarea type="text" placeholder="Enter Project Details" name="details" id="details" required></textarea>
+                        <textarea type="text" placeholder="Enter Todo Details" name="details" id="details" required></textarea>
                         
                         <label for="due-date"><b>Due Date</b></label>
-                        <input type="datetime" name="due-date" id="due-date" required>
+                        <input type="date" name="due-date" id="due-date" required>
 
-                        <label for="priority_type">Priority</label>
+                        <div>
+                        <label for="priority_type"><b>Priority</b></label>
+                        </div>
+                        
                         <div>
                         <input type="radio" id="low_prio" name="priority_type" value="low" required>
                         <label for="low_prio">Low</label>
@@ -76,8 +79,8 @@
                         <label for="high_prio">High</label>
                         </div>
 
-                        <label for="notes"><b>Notes</b></label>
-                        <textarea type="text" placeholder="Enter some notes" name="notes" id="notes"></textarea>
+                        <!-- <label for="notes"><b>Notes</b></label>
+                        <textarea type="text" placeholder="Enter some notes" name="notes" id="notes"></textarea> -->
 
                         <button type="submit" class="btn submit">Submit</button>
                         <button type="button" class="btn cancel">Close</button>
