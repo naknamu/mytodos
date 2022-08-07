@@ -1,8 +1,4 @@
-import { proj_counter } from "./store-project";
-
-let proj_card_array = [];
-
-export function createCard() {
+export function createCard(counter) {
     const locate_container = document.querySelector(".maincontent .container");
 
     //create new card div
@@ -31,8 +27,8 @@ export function createCard() {
     const get_project_Description = JSON.parse(localStorage.getItem('proj_description'));
     // console.log(get_project_Description);
 
-    new_title.textContent = get_project_Name[proj_counter];
-    new_description.textContent = get_project_Description[proj_counter];
+    new_title.textContent = get_project_Name[counter];
+    new_description.textContent = get_project_Description[counter];
 
     //add text content
     new_btn_add.textContent = '+';
@@ -64,13 +60,4 @@ export function createCard() {
     new_btn_container.appendChild(new_btn_view);
     new_btn_container.appendChild(new_btn_count);
     new_btn_container.appendChild(new_btn_delete);
-
-    //store DOM element to local storage
-    // console.log(new_card);
-    proj_card_array.push(new_card);
-    console.log(proj_card_array);
-    localStorage.setItem('proj_card', JSON.stringify(proj_card_array));
-
-    let proj_new_card = JSON.parse(localStorage.getItem('proj_card'));
-    console.log(proj_new_cards);
 }
