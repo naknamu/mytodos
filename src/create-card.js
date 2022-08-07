@@ -1,4 +1,6 @@
-// let id_count = 0;
+import { proj_counter } from "./store-project";
+
+let proj_card_array = [];
 
 export function createCard() {
     const locate_container = document.querySelector(".maincontent .container");
@@ -20,11 +22,17 @@ export function createCard() {
     new_btn_container.classList.add('buttons');
 
     //call user input project name and details
-    const get_projectName =  localStorage.getItem('proj_name');
-    const get_projectDetails = localStorage.getItem('proj_details');
+    // const get_projectName =  localStorage.getItem('proj_name');
+    // const get_projectDetails = localStorage.getItem('proj_details');
 
-    new_title.textContent = get_projectName;
-    new_description.textContent = get_projectDetails;
+    //test using array
+    const get_project_Name = JSON.parse(localStorage.getItem('proj_name'));
+    // console.log(get_projectName);
+    const get_project_Description = JSON.parse(localStorage.getItem('proj_description'));
+    // console.log(get_project_Description);
+
+    new_title.textContent = get_project_Name[proj_counter];
+    new_description.textContent = get_project_Description[proj_counter];
 
     //add text content
     new_btn_add.textContent = '+';
@@ -57,6 +65,12 @@ export function createCard() {
     new_btn_container.appendChild(new_btn_count);
     new_btn_container.appendChild(new_btn_delete);
 
-    //
-    return {get_projectDetails};
+    //store DOM element to local storage
+    // console.log(new_card);
+    proj_card_array.push(new_card);
+    console.log(proj_card_array);
+    localStorage.setItem('proj_card', JSON.stringify(proj_card_array));
+
+    let proj_new_card = JSON.parse(localStorage.getItem('proj_card'));
+    console.log(proj_new_cards);
 }
