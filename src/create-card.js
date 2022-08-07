@@ -1,3 +1,5 @@
+import { proj_name_array, proj_description_array, proj_counter} from "./store-project";
+
 export function createCard(counter) {
     const locate_container = document.querySelector(".maincontent .container");
 
@@ -17,15 +19,9 @@ export function createCard(counter) {
     new_description.classList.add('description');
     new_btn_container.classList.add('buttons');
 
-    //call user input project name and details
-    // const get_projectName =  localStorage.getItem('proj_name');
-    // const get_projectDetails = localStorage.getItem('proj_details');
-
-    //test using array
+    //retrieve project name and description in local storage
     const get_project_Name = JSON.parse(localStorage.getItem('proj_name'));
-    // console.log(get_projectName);
     const get_project_Description = JSON.parse(localStorage.getItem('proj_description'));
-    // console.log(get_project_Description);
 
     new_title.textContent = get_project_Name[counter];
     new_description.textContent = get_project_Description[counter];
@@ -38,7 +34,6 @@ export function createCard(counter) {
 
     //add todos listener
     new_btn_add.addEventListener('click', () => {
-        // console.log('enable add todo form!');
         document.getElementById("myTodos").style.display = "block";
         document.getElementById("todo-overlay").style.display = "block";
     })
@@ -46,9 +41,19 @@ export function createCard(counter) {
     //add class
     new_btn_delete.classList.add('delete_btn');
 
-    //delete card
+    //delete card together with local storage components
     new_btn_delete.addEventListener('click', () => {
         new_card.remove();
+        //remove the items in the array
+        proj_name_array.splice(counter, 1);
+        proj_description_array.splice(counter, 1);
+        //update items in local storage
+        localStorage.setItem('proj_name', JSON.stringify(proj_name_array));
+        localStorage.setItem('proj_description', JSON.stringify(proj_description_array));
+        //decrease project counter count and update in localstorage
+        let new_counter = proj_counter;
+        --new_counter;
+        localStorage.setItem('proj_counter', JSON.stringify(new_counter));
     })
 
     //append to parent container

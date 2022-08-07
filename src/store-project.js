@@ -2,9 +2,9 @@ import { printMe } from "./new-project";
 import { createCard } from "./create-card";
 import { closeForm } from "./new-project";
 
-let proj_name_array = JSON.parse(localStorage.proj_name || '[]');
-let proj_description_array = JSON.parse(localStorage.proj_description || '[]');
-let proj_counter = Number(localStorage.proj_counter || '0');
+export let proj_name_array = JSON.parse(localStorage.proj_name || '[]');
+export let proj_description_array = JSON.parse(localStorage.proj_description || '[]');
+export let proj_counter = JSON.parse(localStorage.proj_counter || '0');
 
 function storeProjectIntoLocalStorage() {
     //locate DOM element
@@ -33,7 +33,7 @@ const form = document.getElementById('myForm').onsubmit = function(){
     //add +1 to project counter
     proj_counter++;
     //store project counter into local storage
-    localStorage.setItem('proj_counter', proj_counter);
+    localStorage.setItem('proj_counter', JSON.stringify(proj_counter));
     //close the form popout
     closeForm();
 
