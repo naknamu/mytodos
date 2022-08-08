@@ -26,7 +26,7 @@
 }
 
 body{
-    height: 100vh;
+    height: 100%;
 }
 
 .content{
@@ -100,7 +100,7 @@ header .login:active {
 }
 
 .maincontent .card{
-    width: 250px;
+    width: 300px;
     padding: 20px;
     box-shadow: rgba(0, 0, 0, 0.16) 2px 2px 2px 2px;
     display: grid;
