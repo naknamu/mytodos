@@ -33,7 +33,7 @@ body{
     display: grid;
     grid-template-rows: 100px 1fr 100px;
     height: 100%;
-    background-color: #f0eef1;
+    /* background-color: #f0eef1; */
     font-family: 'Poppins', sans-serif;
 }
 
@@ -71,7 +71,8 @@ header .login:active {
     grid-template-rows: 50px 1fr;
     gap: 20px;
     padding: 36px;
-    margin-top: 5px;
+    margin-top: 2px;
+    background-color: #f0eef1;
 }
 
 .maincontent .new_project{
@@ -105,6 +106,7 @@ header .login:active {
     box-shadow: rgba(0, 0, 0, 0.16) 2px 2px 2px 2px;
     display: grid;
     gap: 8px;
+    background-color: white;
 }
 
 .maincontent .card:hover{
