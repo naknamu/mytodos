@@ -23,6 +23,17 @@ function storeProjectIntoLocalStorage() {
     localStorage.setItem('proj_description', JSON.stringify(proj_description_array));
 }
 
+//clear form input contents
+function clearInputField() {
+    //locate DOM element
+    const project_name = document.querySelector('#name');
+    const project_description = document.querySelector('#description'); 
+
+    //clear fields
+    project_name.value = '';
+    project_description.value = '';
+}
+
 //when form is submitted
 const form = document.getElementById('myForm').onsubmit = function(){
 
@@ -34,6 +45,8 @@ const form = document.getElementById('myForm').onsubmit = function(){
     proj_counter++;
     //store project counter into local storage
     localStorage.setItem('proj_counter', JSON.stringify(proj_counter));
+    //clear inputs before closing form
+    clearInputField();
     //close the form popout
     closeForm();
 
