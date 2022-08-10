@@ -7,19 +7,33 @@ newProject_button.addEventListener('click', () => {
     document.getElementById("overlay").style.display = 'block';
 })
 
-const closeForm_button = document.querySelector('.cancel');
+//all cancel button logic
+const close_form = document.querySelectorAll('.cancel');
 
-// console.log(closeForm_button);
+close_form.forEach((btn) => {
+    btn.addEventListener('click', () => {
+        //add project form
+        document.getElementById("overlay").style.display = "none";
+        document.getElementById("myForm").style.display = 'none';
 
-closeForm_button.addEventListener('click', () => {
-    // console.log("Add new project!");
-    document.getElementById("myForm").style.display = "none";
-    document.getElementById("overlay").style.display = 'none';
+        //add todo form
+        document.getElementById("myTodos").style.display = "none";
+        document.getElementById("todo-overlay").style.display = 'none';
+    })
 })
 
-export function closeForm() {
-    document.getElementById("myForm").style.display = "none";
-    document.getElementById("overlay").style.display = 'none';
+//close form when user submitted form
+export function closeForm(formType) {
+    switch(formType) {
+        case 'project':
+            document.getElementById("myForm").style.display = "none";
+            document.getElementById("overlay").style.display = 'none';
+            break;
+        case 'todos':
+            document.getElementById("myTodos").style.display = "none";
+            document.getElementById("todo-overlay").style.display = 'none';
+            break;
+    }
 }
 
 export function printMe(){

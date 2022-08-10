@@ -5,6 +5,8 @@ import { closeForm } from "./new-project";
 export let proj_name_array = JSON.parse(localStorage.proj_name || '[]');
 export let proj_description_array = JSON.parse(localStorage.proj_description || '[]');
 export let proj_counter = JSON.parse(localStorage.proj_counter || '0');
+//test
+let project_index_array = JSON.parse(localStorage.todo_title || '[]');
 
 function storeProjectIntoLocalStorage() {
     //locate DOM element
@@ -48,7 +50,12 @@ const form = document.getElementById('myForm').onsubmit = function(){
     //clear inputs before closing form
     clearInputField();
     //close the form popout
-    closeForm();
+    closeForm('project');
 
     return false;
+}
+
+//
+function getProjectIndex(counter) {
+    return {counter};
 }

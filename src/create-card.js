@@ -1,4 +1,4 @@
-import { proj_name_array, proj_description_array, proj_counter} from "./store-project";
+import { proj_name_array, proj_description_array} from "./store-project";
 
 export function createCard(counter) {
     const locate_container = document.querySelector(".maincontent .container");
@@ -18,6 +18,11 @@ export function createCard(counter) {
     new_title.classList.add('title');
     new_description.classList.add('description');
     new_btn_container.classList.add('buttons');
+    new_btn_count.classList.add('count_btn');
+    new_btn_delete.classList.add('delete_btn');
+
+    //add class id
+    new_card.id = 'proj_' + counter;
 
     //retrieve project name and description in local storage
     const get_project_Name = JSON.parse(localStorage.getItem('proj_name'));
@@ -34,12 +39,15 @@ export function createCard(counter) {
 
     //add todos listener
     new_btn_add.addEventListener('click', () => {
+        //enable the add todo form
         document.getElementById("myTodos").style.display = "block";
         document.getElementById("todo-overlay").style.display = "block";
-    })
 
-    //add class
-    new_btn_delete.classList.add('delete_btn');
+        //test
+        //by using project counter (index) we can attach the added todo list items to its parent project
+        console.log('project_index:' + counter);
+        localStorage.setItem('proj_index', JSON.stringify(counter));
+    })
 
     //delete card together with local storage components
     new_btn_delete.addEventListener('click', () => {
@@ -51,9 +59,12 @@ export function createCard(counter) {
         localStorage.setItem('proj_name', JSON.stringify(proj_name_array));
         localStorage.setItem('proj_description', JSON.stringify(proj_description_array));
         //decrease project counter count and update in localstorage
-        let new_counter = proj_counter;
+        let new_counter = localStorage.getItem('proj_counter');
         --new_counter;
         localStorage.setItem('proj_counter', JSON.stringify(new_counter));
+        
+        //test deleting attached todo inside parent project
+
     })
 
     //append to parent container

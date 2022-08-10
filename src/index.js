@@ -1,6 +1,7 @@
 import './style.css';
 import './new-project.js';
 import './store-project.js';
+import './add-todos.js';
 import { createCard } from './create-card';
 
 document.addEventListener('keydown', (event) => {
@@ -14,6 +15,11 @@ document.addEventListener('keydown', (event) => {
             }
     } else if (event.key === 'Delete') {
         localStorage.clear();
+    } else if (event.key === 'Pause') {
+        localStorage.removeItem('todo_title');
+        localStorage.removeItem('todo_counter');
+        //test
+        //delete todo counters and todo title
     }
 })
 
@@ -23,7 +29,7 @@ const pageRefreshed = window.onload = function () {
     // console.log('page is refreshed!');
     //if a project has been stored in local storage then display all data
     let project_counter = Number(localStorage.getItem('proj_counter'));
-    console.log('project counter:' + project_counter);
+    // console.log('project counter:' + project_counter);
     if (project_counter > 0) {
         for (let i=0; i < project_counter; i++)
         {
