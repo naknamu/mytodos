@@ -22,6 +22,27 @@ close_form.forEach((btn) => {
     })
 })
 
+const close_list = document.querySelector('.close_lists');
+
+close_list.addEventListener('click', () => {
+    // console.log('close list!');
+
+    //list header container
+    document.getElementById("lists-overlay").style.display = 'none';
+    document.getElementById("myLists").style.display = "none";
+
+    //list items
+    //use proj index to determine parent project
+    let proj_index = JSON.parse(localStorage.getItem('proj_index'));
+    //locate class of a list and display it
+    let lists = document.getElementsByClassName("list_" + proj_index);
+    for(let i=0; i<lists.length; i++) { 
+        lists[i].style.display='none';
+
+        // console.log("list_" + proj_index);
+    }
+})
+
 //close form when user submitted form
 export function closeForm(formType) {
     switch(formType) {

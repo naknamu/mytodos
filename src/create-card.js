@@ -1,4 +1,5 @@
 import { proj_name_array, proj_description_array} from "./store-project";
+import {todo_counter_array} from "./add-todos";
 
 export function createCard(counter) {
     const locate_container = document.querySelector(".maincontent .container");
@@ -44,9 +45,40 @@ export function createCard(counter) {
         document.getElementById("todo-overlay").style.display = "block";
 
         //test
-        //by using project counter (index) we can attach the added todo list items to its parent project
-        console.log('project_index:' + counter);
+        //by using project counter (index) we can set what project the user selected 
+        // console.log('project_index:' + counter);
         localStorage.setItem('proj_index', JSON.stringify(counter));
+    })
+
+    new_btn_view.addEventListener('click', () => {
+
+        //by using project counter (index) we can set what project the user selected 
+        // console.log('project_index:' + counter);
+        localStorage.setItem('proj_index', JSON.stringify(counter));
+
+        //locate class of a list and display it
+        let lists = document.getElementsByClassName("list_" + counter);
+        for(let i=0; i<lists.length; i++) { 
+            lists[i].style.display='grid';
+        }
+
+        // console.log(todo_counter_array[counter]);
+        //if todo list is not empty then display the list
+        if (todo_counter_array[counter] !== null && todo_counter_array[counter] !== undefined) {
+            document.getElementById("lists-overlay").style.display = 'block';
+            document.getElementById('myLists').style.display = 'block';
+        } 
+        else {
+            alert('Todo list is empty!');
+        }
+    })
+
+    new_btn_count.addEventListener('click', () => {
+        if (todo_counter_array[counter] === null || todo_counter_array[counter] === undefined) {
+            alert('Todo list is empty!');
+        } else {
+            alert('There are '+ todo_counter_array[counter] + ' todos in this project.')
+        }
     })
 
     //delete card together with local storage components
@@ -64,7 +96,9 @@ export function createCard(counter) {
         localStorage.setItem('proj_counter', JSON.stringify(new_counter));
         
         //test deleting attached todo inside parent project
-
+        todo_counter_array.splice(counter, 1);
+        //update local storage
+        localStorage.setItem('todo_counter_array', JSON.stringify(todo_counter_array));
     })
 
     //append to parent container
