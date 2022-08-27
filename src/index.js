@@ -5,6 +5,23 @@ import './add-todos.js';
 import './create-todos.js';
 import { createCard } from './create-card';
 import { createTodos } from './create-todos';
+import enGB from 'date-fns/locale/en-GB';
+import formatRelative from 'date-fns/formatRelative';
+import addDays from 'date-fns/addDays'
+
+const formatRelativeLocale = {
+    lastWeek: "'Last' eeee",
+    yesterday: "'Yesterday'",
+    today: "'Today'",
+    tomorrow: "'Tomorrow'",
+    nextWeek: "'Next' eeee",
+    other: 'dd.MM.yyyy',
+  };
+
+const locale = {
+    ...enGB,
+    formatRelative: (token) => formatRelativeLocale[token],
+};
 
 document.addEventListener('keydown', (event) => {
     // console.log(event.key);
@@ -22,6 +39,10 @@ document.addEventListener('keydown', (event) => {
         localStorage.removeItem('todo_counter');
         //test
         //delete todo counters and todo title
+    } else if (event.key === 'F9') {
+        
+        const tomorrow = addDays(new Date, 0)
+        console.log(formatRelative(tomorrow, new Date(), { locale })) // Tomorrow
     }
 })
 

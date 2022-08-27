@@ -184,7 +184,8 @@ footer a:hover{
     width: 100vw;
     height: 100vh;
     background-color: rgba(128,128,128,0.5); /* color */
-    display: none; /* making it hidden by default */
+    display: none;
+    /* display: block; */
 }
 
 /* The popup form - hidden by default */
@@ -205,20 +206,19 @@ footer a:hover{
     transform: translate(-50%,-50%);
     background-color: white;
     display: none;
+    /* display: block; */
+    border: 5px solid rgb(0, 51, 0);
+    border-radius: 8px;
 }
 
 .wrapper .header{
     display: flex;
     justify-content: space-between;
     padding: 16px;
-    border: 2px solid green;
     background-color: green;
     color: white;
+    border-bottom: 3px solid rgb(0, 51, 0);
 }
-
-/* .wrapper .header svg{
-    fill: aqua;
-} */
 
 .icon:hover {
     background-color: darkgreen;
@@ -243,6 +243,7 @@ footer a:hover{
 
 .lists .grid-line {
     border-right: 1px solid green;
+    padding: 10px;
 }
 
 .lists .checkbox{
@@ -250,20 +251,47 @@ footer a:hover{
     justify-content: center;
 }
 
-.lists #lists-item{
-    padding: 10px;
+.lists #title{
+    font-weight: 600;
+    margin-top: 5px;
+}
+
+.lists #date{
+    color: green;
+    font-size: 14px;
 }
 
 .lists .buttons {
     padding: 10px;
     display: flex;
     justify-content: space-around;
+    align-items: center;
 }
 
-.lists .buttons>div{
+.high{
     border: 1px solid black;
     padding: 0px 3px;
-    color: red;
+    color: white;
+    background-color: red;
+}
+
+.medium{
+    border: 1px solid black;
+    padding: 0px 3px;
+    color: white;
+    background-color: green;
+}
+
+.low{
+    border: 1px solid black;
+    padding: 0px 3px;
+    color: white;
+    background-color: orange;
+}
+
+.strike{
+    text-decoration: line-through;
+    background-color: rgb(100, 100, 100);
 }
 
 /* Add styles to the form container */
@@ -321,7 +349,19 @@ footer a:hover{
 }
 
 /* Set styles to the radio buttons */
+.form-container .radio{
+    margin: 5px 0 16px 0;
+}
+
 .form-container input[type=radio]{
-    padding: 15px;
-    margin: 5px 0 12px 0;
+    transform: scale(1.5);
+    margin: 0 0 0 2px;
+}
+
+.form-container .radio>div{
+    margin: 5px 0 0 0;
+}
+
+.form-container .radio>div>label{
+    padding-left: 8px;
 }

@@ -1,3 +1,5 @@
+import {todo_counter_array} from './add-todos.js';
+
 //dynamically create todo list using js
 
 export function createTodos(index, count) {
@@ -9,8 +11,12 @@ export function createTodos(index, count) {
 
     //create checkbox container
     const checkbox_container = document.createElement('div');
+    //create div container
+    const grid_container = document.createElement('div');
     //create list details element
     const list_details = document.createElement('div');
+    //create duedate element
+    const list_duedate = document.createElement('div');
     //create button container
     const btn_container = document.createElement('div');
 
@@ -43,28 +49,47 @@ export function createTodos(index, count) {
     delete_svg.setAttribute('y2', '24');
 
     //add text, get data from user input todo title
-    // let input_todo_title = document.querySelector('#todo_title');
     let local_todo_title = JSON.parse(localStorage.getItem('todo_title_array'));
-
     list_details.textContent = "" + local_todo_title[index][count];
-    priority_indicator.textContent = 'HIGH';
+    //due date
+    let local_todo_duedate = JSON.parse(localStorage.getItem('todo_duedate_array'));
+    list_duedate.textContent = "" + local_todo_duedate[index][count];
+    //priority
+    let local_todo_priority = JSON.parse(localStorage.getItem('todo_priority_array'));
+    // priority_indicator.textContent = "" + local_todo_priority[index][count];
+    //add class name depending on the value of prio selected by user
+    switch (local_todo_priority[index][count]) {
+        case 'high':
+            priority_indicator.classList.add('high');
+            priority_indicator.textContent = 'HIGH';
+            break;
+        case 'medium':
+            priority_indicator.classList.add('medium');
+            priority_indicator.textContent = 'MED';
+            break;
+        case 'low':
+            priority_indicator.classList.add('low');
+            priority_indicator.textContent = 'LOW';
+            break;
+    }
 
     //add class
     list_container.classList.add('lists');
-    checkbox_container.classList.add('grid-line');
+    // checkbox_container.classList.add('grid-line');
     checkbox_container.classList.add('checkbox');
-    list_details.classList.add('grid-line');
+    grid_container.classList.add('grid-line');
+    // list_details.classList.add('grid-line');
     btn_container.classList.add('buttons');
     view_svg.classList.add('icon');
+    // priority_indicator.classList.add('priority');
     delete_svg.classList.add('icon');
 
-    //use proj index to determine parent project
-    // let proj_index = JSON.parse(localStorage.getItem('proj_index'));
-
+    //todo items from same project are categorized by class
     list_container.classList.add("list_" + index);
 
     //add id
-    list_details.id = "lists-item";
+    list_details.id = "title";
+    list_duedate.id = 'date';
 
     //create checkbox element
     const checkbox = document.createElement('input');
@@ -76,18 +101,97 @@ export function createTodos(index, count) {
     checkbox.value = 'complete';
     checkbox.classList.add('.regular-checkbox');
 
+    //add evenlistener to checklist
+    checkbox.addEventListener('change', (e) => {
+        if (e.target.checked) {
+            console.log('checkbox is checked!');
+            //strikethrough list item
+            checkbox_container.classList.add('strike');
+            grid_container.classList.add('strike');
+            btn_container.classList.add('strike');
+            priority_indicator.style.backgroundColor = 'gray';
+        } else {
+            console.log('checkbox is not checked.');
+            //remove strikethrough
+            checkbox_container.classList.remove('strike');
+            grid_container.classList.remove('strike');
+            btn_container.classList.remove('strike');
+            priority_indicator.style.backgroundColor = 'red';
+        }
+    });
+
+    //
+    delete_svg.addEventListener('click', () => {
+        // console.log('todo list deleted!');
+        //delete todo item
+        list_container.remove();
+        ///find count button
+        const count_btn = document.querySelector('#proj_' + index + ' ' + '.count_btn');
+        //update todo count btn
+        let todo_count = Number(count_btn.textContent);
+        --todo_count;
+        count_btn.textContent = '' + todo_count;
+
+        //clear todo items in local storage
+        //clear todo title   
+        // console.log('index:' + index + 'count:' + count);
+        let local_title_multiarray = JSON.parse(localStorage.getItem('todo_title_multiarray'));
+
+        // console.log('before:' + local_title_multiarray);
+
+        local_title_multiarray[index].splice(count, 1);
+
+        // console.log('after:' + local_title_multiarray);
+
+        //store multiarray with empty arrays in local storage
+        localStorage.setItem('todo_title_multiarray', JSON.stringify(local_title_multiarray));
+
+        //check if an array is empty then remove the empty array
+        let new_title_filtered =  local_title_multiarray.filter(function(e) {
+            return e.length;
+        });
+
+        //store the multidimensional array in local storage
+        localStorage.setItem('todo_title_array', JSON.stringify(new_title_filtered));
+
+        //update todo count array
+        todo_counter_array[index] = todo_count;
+        localStorage.setItem('todo_counter_array', JSON.stringify(todo_counter_array));
+    });
+
+    view_svg.addEventListener('click', () => {
+        console.log('edit todo list!');
+        //enable form
+        document.getElementById("myTodos").style.display = "block";
+        document.getElementById("todo-overlay").style.display = "block";
+        //disable todo items list view
+        //header
+        if (todo_counter_array[count] !== null && todo_counter_array[count] !== undefined) {
+            document.getElementById("lists-overlay").style.display = 'none';
+            document.getElementById('myLists').style.display = 'none';
+        } 
+        //locate class of a list and display it
+        let lists = document.getElementsByClassName("list_" + count);
+        for(let i=0; i<lists.length; i++) { 
+            lists[i].style.display='none';
+        }
+    })
+
     //append to parent element
     list_container.appendChild(checkbox_container);
     checkbox_container.append(checkbox);
-    list_container.appendChild(list_details);
+    list_container.appendChild(grid_container);
+    grid_container.appendChild(list_details);
+    grid_container.appendChild(list_duedate);
+    // list_container.appendChild(list_details);
     list_container.appendChild(btn_container);
-    btn_container.appendChild(view_svg);
     btn_container.appendChild(priority_indicator);
+    btn_container.appendChild(view_svg);
     btn_container.appendChild(delete_svg);
 
     //apend path to respective svg
-    view_svg.appendChild(view_path);
     delete_svg.appendChild(delete_path);
+    view_svg.appendChild(view_path);
 
     //append list container to parent
     myLists.appendChild(list_container);
