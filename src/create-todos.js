@@ -1,4 +1,7 @@
 import {todo_counter_array} from './add-todos.js';
+import { format, parse } from 'date-fns';
+import { formatRelative } from 'date-fns';
+import enGB from 'date-fns/locale/en-GB';
 
 //dynamically create todo list using js
 
@@ -104,25 +107,34 @@ export function createTodos(index, count) {
     //add evenlistener to checklist
     checkbox.addEventListener('change', (e) => {
         if (e.target.checked) {
-            console.log('checkbox is checked!');
+            // console.log('checkbox is checked!');
             //strikethrough list item
             checkbox_container.classList.add('strike');
             grid_container.classList.add('strike');
             btn_container.classList.add('strike');
             priority_indicator.style.backgroundColor = 'gray';
         } else {
-            console.log('checkbox is not checked.');
+            // console.log('checkbox is not checked.');
             //remove strikethrough
             checkbox_container.classList.remove('strike');
             grid_container.classList.remove('strike');
             btn_container.classList.remove('strike');
-            priority_indicator.style.backgroundColor = 'red';
+            switch (local_todo_priority[index][count]) {
+                case 'high':
+                    priority_indicator.style.backgroundColor = 'red';
+                    break;
+                case 'medium':
+                    priority_indicator.style.backgroundColor = 'green';
+                    break;
+                case 'low':
+                    priority_indicator.style.backgroundColor = 'orange';
+                    break;
+            }
         }
     });
 
-    //
+    //trash icon
     delete_svg.addEventListener('click', () => {
-        // console.log('todo list deleted!');
         //delete todo item
         list_container.remove();
         ///find count button
@@ -131,49 +143,84 @@ export function createTodos(index, count) {
         let todo_count = Number(count_btn.textContent);
         --todo_count;
         count_btn.textContent = '' + todo_count;
+        //update todo count array
+        todo_counter_array[index] = todo_count;
+        localStorage.setItem('todo_counter_array', JSON.stringify(todo_counter_array));
 
-        //clear todo items in local storage
-        //clear todo title   
-        // console.log('index:' + index + 'count:' + count);
+        /**CLEAR TITLE**/
         let local_title_multiarray = JSON.parse(localStorage.getItem('todo_title_multiarray'));
-
-        // console.log('before:' + local_title_multiarray);
-
+        //remove an element using project index and count
         local_title_multiarray[index].splice(count, 1);
-
-        // console.log('after:' + local_title_multiarray);
-
         //store multiarray with empty arrays in local storage
         localStorage.setItem('todo_title_multiarray', JSON.stringify(local_title_multiarray));
-
         //check if an array is empty then remove the empty array
         let new_title_filtered =  local_title_multiarray.filter(function(e) {
             return e.length;
         });
-
         //store the multidimensional array in local storage
         localStorage.setItem('todo_title_array', JSON.stringify(new_title_filtered));
 
-        //update todo count array
-        todo_counter_array[index] = todo_count;
-        localStorage.setItem('todo_counter_array', JSON.stringify(todo_counter_array));
+        /**CLEAR DUE DATE**/
+        let local_duedate_multiarray = JSON.parse(localStorage.getItem('todo_duedate_multiarray'));
+        local_duedate_multiarray[index].splice(count, 1);
+        localStorage.setItem('todo_duedate_multiarray', JSON.stringify(local_duedate_multiarray));
+        let new_duedate_filtered =  local_duedate_multiarray.filter(function(e) {
+            return e.length;
+        });
+        localStorage.setItem('todo_duedate_array', JSON.stringify(new_duedate_filtered));
+
+        /**CLEAR PRIORITY**/
+        let local_priority_multiarray = JSON.parse(localStorage.getItem('todo_priority_multiarray'));
+        local_priority_multiarray[index].splice(count, 1);
+        localStorage.setItem('todo_priority_multiarray', JSON.stringify(local_priority_multiarray));
+        let new_priority_filtered =  local_priority_multiarray.filter(function(e) {
+            return e.length;
+        });
+        localStorage.setItem('todo_priority_array', JSON.stringify(new_priority_filtered));
     });
 
+    //
     view_svg.addEventListener('click', () => {
-        console.log('edit todo list!');
+        // console.log('edit todo list!');
         //enable form
         document.getElementById("myTodos").style.display = "block";
         document.getElementById("todo-overlay").style.display = "block";
         //disable todo items list view
         //header
-        if (todo_counter_array[count] !== null && todo_counter_array[count] !== undefined) {
-            document.getElementById("lists-overlay").style.display = 'none';
-            document.getElementById('myLists').style.display = 'none';
-        } 
+        document.getElementById("lists-overlay").style.display = 'none';
+        document.getElementById('myLists').style.display = 'none';
         //locate class of a list and display it
-        let lists = document.getElementsByClassName("list_" + count);
+        let lists = document.getElementsByClassName("list_" + index);
+        // console.log(lists);
         for(let i=0; i<lists.length; i++) { 
             lists[i].style.display='none';
+        }
+
+        //populate all input fields
+        /***** TODO TITLE *****/
+        //locate todo title input DOM
+        const todo_title = document.querySelector('#todo_title');
+        todo_title.value = "" + local_todo_title[index][count];
+
+        /***** DUE DATE *****/
+        const todo_duedate = document.querySelector('#due_date');
+        //
+        let duedate_local_raw = JSON.parse(localStorage.getItem('duedate_raw_array'));
+        todo_duedate.value = duedate_local_raw[index][count];
+
+        /***** PRIORITY *****/
+        const todo_priority = document.querySelector("input[name=priority_type]");
+
+        switch(local_todo_priority[index][count]) {
+            case 'low':
+                document.querySelector('#low_prio').checked = true;
+                break;
+            case 'medium':
+                document.querySelector('#medium_prio').checked = true;
+                break;
+            case 'high':
+                document.querySelector('#high_prio').checked = true;
+                break;
         }
     })
 
@@ -196,3 +243,18 @@ export function createTodos(index, count) {
     //append list container to parent
     myLists.appendChild(list_container);
 }
+
+
+const formatRelativeLocale = {
+    lastWeek: "'Last' eeee",
+    yesterday: "'Yesterday'",
+    today: "'Today'",
+    tomorrow: "'Tomorrow'",
+    nextWeek: "'Next' eeee",
+    other: 'iii, MMM dd, yyyy',
+};
+
+const locale = {
+    ...enGB,
+    formatRelative: (token) => formatRelativeLocale[token],
+};

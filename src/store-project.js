@@ -18,7 +18,7 @@ function storeProjectIntoLocalStorage() {
     proj_description_array.push(project_description.value);
 
     //test
-    console.log(proj_name_array);
+    // console.log(proj_name_array);
 
     //store array into local storage
     localStorage.setItem('proj_name', JSON.stringify(proj_name_array));

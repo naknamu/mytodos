@@ -12,6 +12,7 @@ export let todo_title_filtered = JSON.parse(localStorage.todo_title_array || '[]
 /* DUE DATE */
 let todo_duedate_multiarray = JSON.parse(localStorage.todo_duedate_multiarray || '[]');
 let todo_duedate_filtered = JSON.parse(localStorage.todo_duedate_array || '[]');
+let duedate_raw_array = JSON.parse(localStorage.duedate_raw_array || '[]');
 
 const formatRelativeLocale = {
     lastWeek: "'Last' eeee",
@@ -53,17 +54,17 @@ function storeTodosInLocalStorage(proj_index, todo_count) {
 
     /***** DUE DATE *****/
     const todo_duedate = document.querySelector('#due_date');
-    // console.log(todo_duedate.value);
-    let format_duedate = format(new Date(todo_duedate.value), 'iii, MMM dd, yyyy');
+    //raw value of due date (not formatted by date-fns)
+    duedate_raw_array.push([]);
+    duedate_raw_array[proj_index][todo_count] = todo_duedate.value;
+    localStorage.setItem('duedate_raw_array', JSON.stringify(duedate_raw_array));
 
-    let formatRel = formatRelative(new Date(todo_duedate.value), new Date(), { locale });
-    console.log(formatRel);
-
-    // console.log(format_duedate);
+    // let format_duedate = format(new Date(todo_duedate.value), 'iii, MMM dd, yyyy');
+    let formatRel_date = formatRelative(new Date(todo_duedate.value), new Date(), { locale });
     //create first an empty array
     todo_duedate_multiarray.push([]);
     //assign value to the array
-    todo_duedate_multiarray[proj_index][todo_count] = formatRel;
+    todo_duedate_multiarray[proj_index][todo_count] = formatRel_date;
     //store multiarray with empty arrays in local storage
     localStorage.setItem('todo_duedate_multiarray', JSON.stringify(todo_duedate_multiarray));
     //check if an array is empty then remove the empty array
