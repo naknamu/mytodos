@@ -8,7 +8,9 @@ module.exports = {
     storeProject: './src/store-project.js',
     createCard: './src/create-card.js',
     addTodos: './src/add-todos.js',
-    createTodos: './src/create-todos.js'
+    createTodos: './src/create-todos.js',
+    editTodos: './src/edit-todos.js',
+    close: './src/close.js'
   },
   output: {
     filename: '[name].bundle.js',

@@ -45,7 +45,7 @@
                     </div>
                 </div> -->
             </div>
-
+            <!--ADD TODO-->
             <div class="overlay-disabler" id="todo-overlay">
                 <div class="form-popup" id="myTodos">
                     <form class="form-container">
@@ -89,7 +89,50 @@
                     </form>
                 </div>
             </div>
+            <!--EDIT TODO-->
+            <div class="overlay-disabler" id="edit_todo-overlay">
+                <div class="form-popup" id="edit_Todos">
+                    <form class="form-container">
+                        <h1>Edit Todo</h1>
+    
+                        <label for="edit_title"><b>Title</b></label>
+                        <input type="text" placeholder="Edit Todo Title" name="edit_title" id="edit_title" required>
+    
+                        <!-- <label for="details"><b>Details</b></label>
+                        <textarea type="text" placeholder="Enter Todo Details" name="details" id="details" required></textarea> -->
+                        
+                        <label for="edit_date"><b>Due Date</b></label>
+                        <input type="date" name="edit_date" id="edit_date" required>
+                        
 
+                        <div class="radio">
+                        <label for="edit_priority_type"><b>Priority</b></label>
+
+                        <div>
+                        <input type="radio" id="edit_low_prio" name="edit_priority_type" value="low" required>
+                        <label for="edit_low_prio">Low</label>
+                        </div>
+
+                        <div>
+                        <input type="radio" id="edit_medium_prio" name="edit_priority_type" value="medium" required>
+                        <label for="edit_medium_prio">Medium</label>
+                        </div>
+
+                        <div>
+                        <input type="radio" id="edit_high_prio" name="edit_priority_type" value="high" required>
+                        <label for="edit_high_prio">High</label>
+                        </div>
+
+                        </div>
+
+                        <!-- <label for="notes"><b>Notes</b></label>
+                        <textarea type="text" placeholder="Enter some notes" name="notes" id="notes"></textarea> -->
+
+                        <button type="submit" class="btn submit">Submit</button>
+                        <button type="button" class="btn cancel">Close</button>
+                    </form>
+                </div>
+            </div>
             <!--TODO LISTS-->
             <div class="overlay-disabler" id="lists-overlay">
                 <div class="wrapper" id="myLists">
@@ -100,7 +143,7 @@
                         </svg>
                         <!-- <button>X</button> -->
                     </div>
-                    <div class="lists" id="list_0">
+                    <!-- <div class="lists" id="list_0">
                         <div class="checkbox">
                             <input class=".regular-checkbox" type="checkbox" name="complete" id="complete">
                         </div>
@@ -117,7 +160,7 @@
                                 <path fill="currentColor" d="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z" />
                             </svg>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
 

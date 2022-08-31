@@ -251,12 +251,12 @@ footer a:hover{
     justify-content: center;
 }
 
-.lists #title{
+.lists .title{
     font-weight: 600;
     margin-top: 5px;
 }
 
-.lists #date{
+.lists .date{
     color: green;
     font-size: 14px;
 }

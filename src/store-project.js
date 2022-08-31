@@ -1,6 +1,6 @@
 import { printMe } from "./new-project";
 import { createCard } from "./create-card";
-import { closeForm } from "./new-project";
+import { closeForm } from "./close";
 
 export let proj_name_array = JSON.parse(localStorage.proj_name || '[]');
 export let proj_description_array = JSON.parse(localStorage.proj_description || '[]');

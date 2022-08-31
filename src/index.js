@@ -3,6 +3,7 @@ import './new-project.js';
 import './store-project.js';
 import './add-todos.js';
 import './create-todos.js';
+import './edit-todos.js'
 import { createCard } from './create-card';
 import { createTodos } from './create-todos';
 import enGB from 'date-fns/locale/en-GB';

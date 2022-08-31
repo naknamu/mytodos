@@ -1,7 +1,4 @@
 import {todo_counter_array} from './add-todos.js';
-import { format, parse } from 'date-fns';
-import { formatRelative } from 'date-fns';
-import enGB from 'date-fns/locale/en-GB';
 
 //dynamically create todo list using js
 
@@ -17,7 +14,7 @@ export function createTodos(index, count) {
     //create div container
     const grid_container = document.createElement('div');
     //create list details element
-    const list_details = document.createElement('div');
+    const list_title = document.createElement('div');
     //create duedate element
     const list_duedate = document.createElement('div');
     //create button container
@@ -53,7 +50,7 @@ export function createTodos(index, count) {
 
     //add text, get data from user input todo title
     let local_todo_title = JSON.parse(localStorage.getItem('todo_title_array'));
-    list_details.textContent = "" + local_todo_title[index][count];
+    list_title.textContent = "" + local_todo_title[index][count];
     //due date
     let local_todo_duedate = JSON.parse(localStorage.getItem('todo_duedate_array'));
     list_duedate.textContent = "" + local_todo_duedate[index][count];
@@ -78,21 +75,21 @@ export function createTodos(index, count) {
 
     //add class
     list_container.classList.add('lists');
-    // checkbox_container.classList.add('grid-line');
     checkbox_container.classList.add('checkbox');
     grid_container.classList.add('grid-line');
-    // list_details.classList.add('grid-line');
+    list_title.classList.add('title');
+    list_duedate.classList.add('date');
     btn_container.classList.add('buttons');
     view_svg.classList.add('icon');
-    // priority_indicator.classList.add('priority');
     delete_svg.classList.add('icon');
 
     //todo items from same project are categorized by class
     list_container.classList.add("list_" + index);
 
     //add id
-    list_details.id = "title";
-    list_duedate.id = 'date';
+    list_title.id = "title_" + index + "_"+ count;
+    list_duedate.id = 'date_' + index + "_"+ count;
+    priority_indicator.id = 'prio_' + index + '_' + count;
 
     //create checkbox element
     const checkbox = document.createElement('input');
@@ -181,10 +178,12 @@ export function createTodos(index, count) {
 
     //
     view_svg.addEventListener('click', () => {
+        /*STORE TODO COUNT IN LOCAL STORAGE*/
+        localStorage.setItem('todo_count_selected', JSON.stringify(count));
         // console.log('edit todo list!');
         //enable form
-        document.getElementById("myTodos").style.display = "block";
-        document.getElementById("todo-overlay").style.display = "block";
+        document.getElementById("edit_todo-overlay").style.display = "block";
+        document.getElementById("edit_Todos").style.display = "block";
         //disable todo items list view
         //header
         document.getElementById("lists-overlay").style.display = 'none';
@@ -199,27 +198,26 @@ export function createTodos(index, count) {
         //populate all input fields
         /***** TODO TITLE *****/
         //locate todo title input DOM
-        const todo_title = document.querySelector('#todo_title');
+        let local_todo_title = JSON.parse(localStorage.getItem('todo_title_array'));
+        const todo_title = document.querySelector('#edit_title');
         todo_title.value = "" + local_todo_title[index][count];
 
         /***** DUE DATE *****/
-        const todo_duedate = document.querySelector('#due_date');
+        const todo_duedate = document.querySelector('#edit_date');
         //
         let duedate_local_raw = JSON.parse(localStorage.getItem('duedate_raw_array'));
         todo_duedate.value = duedate_local_raw[index][count];
 
         /***** PRIORITY *****/
-        const todo_priority = document.querySelector("input[name=priority_type]");
-
         switch(local_todo_priority[index][count]) {
             case 'low':
-                document.querySelector('#low_prio').checked = true;
+                document.querySelector('#edit_low_prio').checked = true;
                 break;
             case 'medium':
-                document.querySelector('#medium_prio').checked = true;
+                document.querySelector('#edit_medium_prio').checked = true;
                 break;
             case 'high':
-                document.querySelector('#high_prio').checked = true;
+                document.querySelector('#edit_high_prio').checked = true;
                 break;
         }
     })
@@ -228,7 +226,7 @@ export function createTodos(index, count) {
     list_container.appendChild(checkbox_container);
     checkbox_container.append(checkbox);
     list_container.appendChild(grid_container);
-    grid_container.appendChild(list_details);
+    grid_container.appendChild(list_title);
     grid_container.appendChild(list_duedate);
     // list_container.appendChild(list_details);
     list_container.appendChild(btn_container);
@@ -243,18 +241,3 @@ export function createTodos(index, count) {
     //append list container to parent
     myLists.appendChild(list_container);
 }
-
-
-const formatRelativeLocale = {
-    lastWeek: "'Last' eeee",
-    yesterday: "'Yesterday'",
-    today: "'Today'",
-    tomorrow: "'Tomorrow'",
-    nextWeek: "'Next' eeee",
-    other: 'iii, MMM dd, yyyy',
-};
-
-const locale = {
-    ...enGB,
-    formatRelative: (token) => formatRelativeLocale[token],
-};

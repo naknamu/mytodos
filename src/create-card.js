@@ -1,7 +1,7 @@
 import { proj_name_array, proj_description_array} from "./store-project";
 import {todo_counter_array} from "./add-todos";
 
-export function createCard(counter) {
+export function createCard(index) {
     const locate_container = document.querySelector(".maincontent .container");
 
     //create new card div
@@ -23,14 +23,14 @@ export function createCard(counter) {
     new_btn_delete.classList.add('delete_btn');
 
     //add class id
-    new_card.id = 'proj_' + counter;
+    new_card.id = 'proj_' + index;
 
     //retrieve project name and description in local storage
     const get_project_Name = JSON.parse(localStorage.getItem('proj_name'));
     const get_project_Description = JSON.parse(localStorage.getItem('proj_description'));
 
-    new_title.textContent = get_project_Name[counter];
-    new_description.textContent = get_project_Description[counter];
+    new_title.textContent = get_project_Name[index];
+    new_description.textContent = get_project_Description[index];
 
     //add text content
     new_btn_add.textContent = '+';
@@ -47,24 +47,24 @@ export function createCard(counter) {
         //test
         //by using project counter (index) we can set what project the user selected 
         // console.log('project_index:' + counter);
-        localStorage.setItem('proj_index', JSON.stringify(counter));
+        localStorage.setItem('proj_index', JSON.stringify(index));
     })
 
     new_btn_view.addEventListener('click', () => {
 
         //by using project counter (index) we can set what project the user selected 
         // console.log('project_index:' + counter);
-        localStorage.setItem('proj_index', JSON.stringify(counter));
+        localStorage.setItem('proj_index', JSON.stringify(index));
 
         //locate class of a list and display it
-        let lists = document.getElementsByClassName("list_" + counter);
+        let lists = document.getElementsByClassName("list_" + index);
         for(let i=0; i<lists.length; i++) { 
             lists[i].style.display='grid';
         }
 
         // console.log(todo_counter_array[counter]);
         //if todo list is not empty then display the list
-        if (todo_counter_array[counter] !== null && todo_counter_array[counter] !== undefined) {
+        if (todo_counter_array[index] !== null && todo_counter_array[index] !== undefined) {
             document.getElementById("lists-overlay").style.display = 'block';
             document.getElementById('myLists').style.display = 'block';
         } 
@@ -74,10 +74,10 @@ export function createCard(counter) {
     })
 
     new_btn_count.addEventListener('click', () => {
-        if (todo_counter_array[counter] === null || todo_counter_array[counter] === undefined) {
+        if (todo_counter_array[index] === null || todo_counter_array[index] === undefined) {
             alert('Todo list is empty!');
         } else {
-            alert('There are '+ todo_counter_array[counter] + ' todos in this project.')
+            alert('There are '+ todo_counter_array[index] + ' todos in this project.')
         }
     })
 
@@ -85,8 +85,8 @@ export function createCard(counter) {
     new_btn_delete.addEventListener('click', () => {
         new_card.remove();
         //remove the items in the array
-        proj_name_array.splice(counter, 1);
-        proj_description_array.splice(counter, 1);
+        proj_name_array.splice(index, 1);
+        proj_description_array.splice(index, 1);
         //update items in local storage
         localStorage.setItem('proj_name', JSON.stringify(proj_name_array));
         localStorage.setItem('proj_description', JSON.stringify(proj_description_array));
@@ -96,7 +96,7 @@ export function createCard(counter) {
         localStorage.setItem('proj_counter', JSON.stringify(new_counter));
         
         //test deleting attached todo inside parent project
-        todo_counter_array.splice(counter, 1);
+        todo_counter_array.splice(index, 1);
         //update local storage
         localStorage.setItem('todo_counter_array', JSON.stringify(todo_counter_array));
     })

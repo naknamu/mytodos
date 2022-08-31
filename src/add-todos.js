@@ -1,4 +1,4 @@
-import { closeForm } from "./new-project";
+import { closeForm } from "./close.js";
 import { createTodos } from "./create-todos";
 import { format } from 'date-fns';
 import { formatRelative } from 'date-fns';
@@ -14,24 +14,9 @@ let todo_duedate_multiarray = JSON.parse(localStorage.todo_duedate_multiarray ||
 let todo_duedate_filtered = JSON.parse(localStorage.todo_duedate_array || '[]');
 let duedate_raw_array = JSON.parse(localStorage.duedate_raw_array || '[]');
 
-const formatRelativeLocale = {
-    lastWeek: "'Last' eeee",
-    yesterday: "'Yesterday'",
-    today: "'Today'",
-    tomorrow: "'Tomorrow'",
-    nextWeek: "'Next' eeee",
-    other: 'iii, MMM dd, yyyy',
-};
-
-const locale = {
-    ...enGB,
-    formatRelative: (token) => formatRelativeLocale[token],
-};
-
 /* PRIORITY */
 let todo_priority_multiarray = JSON.parse(localStorage.todo_priority_multiarray || '[]');
 let todo_priority_filtered = JSON.parse(localStorage.todo_priority_array || '[]');
-
 
 //store added todos in an array and then in local storage
 function storeTodosInLocalStorage(proj_index, todo_count) {
@@ -129,3 +114,17 @@ const addTodo_form = document.getElementById('myTodos').onsubmit = function() {
 
     return false;
 }
+
+const formatRelativeLocale = {
+    lastWeek: "'Last' eeee",
+    yesterday: "'Yesterday'",
+    today: "'Today'",
+    tomorrow: "'Tomorrow'",
+    nextWeek: "'Next' eeee",
+    other: 'iii, MMM dd, yyyy',
+};
+
+const locale = {
+    ...enGB,
+    formatRelative: (token) => formatRelativeLocale[token],
+};
