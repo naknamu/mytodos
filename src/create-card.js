@@ -93,6 +93,7 @@ export function createCard(index) {
         //decrease project counter count and update in localstorage
         let new_counter = localStorage.getItem('proj_counter');
         --new_counter;
+        console.log(new_counter);
         localStorage.setItem('proj_counter', JSON.stringify(new_counter));
         
         //test deleting attached todo inside parent project

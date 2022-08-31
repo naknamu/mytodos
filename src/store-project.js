@@ -4,9 +4,7 @@ import { closeForm } from "./close";
 
 export let proj_name_array = JSON.parse(localStorage.proj_name || '[]');
 export let proj_description_array = JSON.parse(localStorage.proj_description || '[]');
-export let proj_counter = JSON.parse(localStorage.proj_counter || '0');
-//test
-let project_index_array = JSON.parse(localStorage.todo_title || '[]');
+// export let proj_counter = JSON.parse(localStorage.proj_counter || '0');
 
 function storeProjectIntoLocalStorage() {
     //locate DOM element
@@ -41,6 +39,9 @@ const form = document.getElementById('myForm').onsubmit = function(){
 
     //store project into local storage 
     storeProjectIntoLocalStorage();
+    //
+    let proj_counter = JSON.parse(localStorage.proj_counter || '0');
+    // console.log(proj_counter);
     //create project card 
     createCard(proj_counter);
     //add +1 to project counter
@@ -53,9 +54,4 @@ const form = document.getElementById('myForm').onsubmit = function(){
     closeForm('project');
 
     return false;
-}
-
-//
-function getProjectIndex(counter) {
-    return {counter};
 }
