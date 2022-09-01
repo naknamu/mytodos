@@ -1,5 +1,10 @@
 import {todo_counter_array} from './add-todos.js';
 
+/* CHECKBOX */
+let todo_checkbox_multiarray = JSON.parse(localStorage.todo_checkbox_multiarray || '[]');
+let todo_checkbox_filtered = JSON.parse(localStorage.todo_checkbox_array || '[]');
+
+
 //dynamically create todo list using js
 
 export function createTodos(index, count) {
@@ -106,16 +111,12 @@ export function createTodos(index, count) {
         if (e.target.checked) {
             // console.log('checkbox is checked!');
             //strikethrough list item
-            checkbox_container.classList.add('strike');
-            grid_container.classList.add('strike');
-            btn_container.classList.add('strike');
+            list_container.classList.add('strike');
             priority_indicator.style.backgroundColor = 'gray';
         } else {
             // console.log('checkbox is not checked.');
             //remove strikethrough
-            checkbox_container.classList.remove('strike');
-            grid_container.classList.remove('strike');
-            btn_container.classList.remove('strike');
+            list_container.classList.remove('strike');
             switch (local_todo_priority[index][count]) {
                 case 'high':
                     priority_indicator.style.backgroundColor = 'red';
@@ -128,7 +129,34 @@ export function createTodos(index, count) {
                     break;
             }
         }
+        console.log(checkbox.checked);
+        /*Store checkbox value to local storage*/
+        todo_checkbox_multiarray.push([]);
+        todo_checkbox_multiarray[index][count] = checkbox.checked;
+        //store multiarray with empty arrays in local storage
+        localStorage.setItem('todo_checkbox_multiarray', JSON.stringify(todo_checkbox_multiarray));
+        //check if an array is empty then remove the empty array
+        todo_checkbox_filtered =  todo_checkbox_multiarray.filter(function(e) {
+            return e.length;
+        });
+        //store the multidimensional array in local storage
+        localStorage.setItem('todo_checkbox_array', JSON.stringify(todo_checkbox_filtered));
     });
+
+    //if window is refreshed check if checbox is true or false
+    let local_checkbox_multiarray = JSON.parse(localStorage.todo_checkbox_multiarray || '[]');
+    console.log(local_checkbox_multiarray[index][count]);
+    switch(local_checkbox_multiarray[index][count]){
+        case true:
+            //strikethrough list item
+            list_container.classList.add('strike');
+            priority_indicator.style.backgroundColor = 'gray';
+            checkbox.checked =true;
+            break;
+        case false:
+            list_container.classList.remove('strike');
+            break;
+    }
 
     //trash icon
     delete_svg.addEventListener('click', () => {
