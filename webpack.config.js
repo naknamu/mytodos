@@ -2,6 +2,9 @@ const path = require('path');
 
 module.exports = {
   mode: 'development',
+  kit: {
+    floc: true
+  },
   entry: {
     index: './src/index.js',
     newProject: './src/new-project.js',
