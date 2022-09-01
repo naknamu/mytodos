@@ -144,18 +144,20 @@ export function createTodos(index, count) {
     });
 
     //if window is refreshed check if checbox is true or false
-    let local_checkbox_multiarray = JSON.parse(localStorage.todo_checkbox_multiarray || '[]');
-    console.log(local_checkbox_multiarray[index][count]);
-    switch(local_checkbox_multiarray[index][count]){
-        case true:
-            //strikethrough list item
-            list_container.classList.add('strike');
-            priority_indicator.style.backgroundColor = 'gray';
-            checkbox.checked =true;
-            break;
-        case false:
-            list_container.classList.remove('strike');
-            break;
+    todo_checkbox_multiarray = JSON.parse(localStorage.todo_checkbox_multiarray || '[]');
+    if (todo_checkbox_multiarray.length > 0){
+        // console.log('not empty!');
+        switch(todo_checkbox_multiarray[index][count]){
+            case true:
+                //strikethrough list item
+                list_container.classList.add('strike');
+                priority_indicator.style.backgroundColor = 'gray';
+                checkbox.checked =true;
+                break;
+            case false:
+                list_container.classList.remove('strike');
+                break;
+        }
     }
 
     //trash icon
