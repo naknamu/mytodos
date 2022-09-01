@@ -100,6 +100,10 @@ export function createCard(index) {
         todo_counter_array.splice(index, 1);
         //update local storage
         localStorage.setItem('todo_counter_array', JSON.stringify(todo_counter_array));
+
+        /**DELETE ALL TODO ITEMS ATTACHED TO THE PROJECT DELETED */
+        const list_container = document.querySelector('.list_' + index);
+        list_container.remove();
     })
 
     //append to parent container
