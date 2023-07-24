@@ -102,6 +102,7 @@ header .login:active {
 
 .maincontent .card{
     width: 300px;
+    height: 300px;
     padding: 20px;
     box-shadow: rgba(0, 0, 0, 0.16) 2px 2px 2px 2px;
     display: grid;
